@@ -31,4 +31,8 @@ class Delayed::Job
   def self.find(*args)
     DelayedJobFake.new
   end
+
+  def self.find_by(*args)
+    DelayedJobFake.new
+  end
 end
