@@ -1,0 +1,8 @@
+<h1>View Job</h1>
+<% if @job %>
+  <ul class="job">
+    <%= partial :job, {:job => @job} %>
+  </ul>
+<% else %>
+  <p>Job not found!</p>
+<% end %>

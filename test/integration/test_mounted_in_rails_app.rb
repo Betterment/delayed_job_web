@@ -16,4 +16,32 @@ class TestMountedInRailsApp < MiniTest::Unit::TestCase
       assert last_response.ok?, "Received bad response: #{last_response.inspect}"
     end
   end
+
+  def test_show_with_known_job
+    job = OpenStruct.new
+
+    find_by = lambda { | criteria |
+      criteria.must_equal({ :id => "12" })
+      job
+    }
+
+    Delayed::Job.stub(:find_by, find_by) do
+      get "/delayed_job/jobs/12"
+      assert last_response.ok?, "Received bad response: #{last_response.inspect}"
+    end
+  end
+
+  def test_show_without_known_job
+    job = nil
+
+    find_by = lambda { | criteria |
+      criteria.must_equal({ :id => "12" })
+      job
+    }
+
+    Delayed::Job.stub(:find_by, find_by) do
+      get "/delayed_job/jobs/12"
+      assert last_response.ok?, "Received bad response: #{last_response.inspect}"
+    end
+  end
 end
