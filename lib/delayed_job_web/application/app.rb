@@ -139,11 +139,6 @@ class DelayedJobWeb < Sinatra::Base
     redirect back
   end
 
-  post "/failed/clear" do
-    delayed_jobs(:failed, @queues).delete_all
-    redirect u('failed')
-  end
-
   def delayed_jobs(type, queues = [])
     rel = delayed_job
 
