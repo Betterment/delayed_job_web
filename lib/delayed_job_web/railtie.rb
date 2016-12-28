@@ -5,3 +5,5 @@
 # implement #each.
 
 DelayedJobWeb.disable :sessions
+
+Delayed::Job.table_name = ENV.fetch('DELAYED_JOB_TABLE_NAME', 'delayed_jobs')
